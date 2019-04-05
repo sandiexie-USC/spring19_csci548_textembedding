@@ -28,12 +28,10 @@ class DITK_TextEmbedding():
 		self.sentences = []
 		self.benchmarks = ['conll2003', 'cornellMD', 'categorical', 'semEval']
 		self.is_benchmark = 0
-		self.metrics = {
-							'conll2003' : ['precision', 'recall', 'F1'],
-							'cornellMD' : ['precision', 'recall', 'F1'],
-							'categorical' : ['mse'],
-							'semEval' : ['pearseon_coeff']
-						}
+		self.metrics = {'conll2003' : ['precision', 'recall', 'F1'],
+						'cornellMD' : ['precision', 'recall', 'F1'],
+						'categorical' : ['mse'],
+						'semEval' : ['pearseon_coeff']}
 
 	@classmethod
 	@abc.abstractmethod
@@ -51,8 +49,8 @@ class DITK_TextEmbedding():
 
 	def readSemEval(self, fileName):
 		pass
-		
-    @classmethod
+	
+	@classmethod
 	@abc.abstractmethod
 	def train():
 		"""
