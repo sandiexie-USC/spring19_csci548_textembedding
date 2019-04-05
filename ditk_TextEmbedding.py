@@ -13,9 +13,23 @@ class DITK_TextEmbedding():
 		3. CategoricalDataset:
 			e.g. ["Office Services Coordinator", 69222.18]
 	"""
+	
+
+
 
 	def __init__(self):
-		pass
+		"""
+		Shared data members initialized in the constructor -- 
+
+		sentences -- list of token obtained from the dataset
+		benchmarks -- list of pre-defined benchmarks as strings
+		benchmark_flag -- boolean value to indicate if the dataset is a benchmark or not
+		metrics -- dictionary of evaluation metrics along with their computed values after testing
+		"""
+		self.sentences = []
+		self.benchmarks = ['conll2003', 'cornellMD', 'categorical']
+		self.benchmark_flag = 0
+		self.metrics = {}
 
 	def read_Dataset():
 		pass
@@ -26,8 +40,28 @@ class DITK_TextEmbedding():
 	def readCategoricalDataset():
 		pass
 
-	def readCoNll2003():
-		pass
+	def clean_conll2003(text, to_lower=False):
+    # clean the text: no weird or special characters
+    text = unidecode(text.decode("utf-8"))
+    # normalize numbers
+    text = re.sub(r"[0-9]", "1", text)
+    if to_lower:
+        text = text.lower()
+    return text
+
+	def readCoNll2003(self, to_lower=False, sources=["data/conll2003/train.txt"]):
+		for fname in sources:
+            tokens = []
+            for line in open(fname):
+                if line.startswith("-DOCSTART- -X- -X-"):
+                    if tokens:
+                        yield tokens
+                    tokens = []
+                elif line.strip():
+                    tokens.append(clean_conll2003(line.split()[0], to_lower))
+                else:
+                    tokens.append('')
+            yield tokens
 
 	def train():
 		"""
@@ -41,13 +75,17 @@ class DITK_TextEmbedding():
 		args: string: a sentence to embed
 		return: vector[int]: a vector embedding of
 		"""
-		pass
+		
 
-	def evaluate():
+	def evaluate(self):
 		"""
-		args: 	string:
-				float:
-		return: string:
-				float:
+		Task - Evaluates a pre-trained model on the test dataset and returns the evaluation metrics as a dictionary
+
+		Input:
+		model -- path to the pre-trained model
+		filename -- path to the evaluation/test dataset
+		
+		return: 
+		Dictionary of {evaluation_metric<string>:calculated_value<float>}
 		"""
 		pass
