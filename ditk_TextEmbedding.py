@@ -13,7 +13,6 @@ class DITK_TextEmbedding():
 		3. CategoricalDataset:
 			e.g. ["Office Services Coordinator", 69222.18]
 	"""
-	
 
 
 
@@ -21,48 +20,40 @@ class DITK_TextEmbedding():
 		"""
 		Shared data members initialized in the constructor -- 
 
-		sentences -- list of token obtained from the dataset
+		sentences -- input for each model as required by each method
 		benchmarks -- list of pre-defined benchmarks as strings
 		benchmark_flag -- boolean value to indicate if the dataset is a benchmark or not
 		metrics -- dictionary of evaluation metrics along with their computed values after testing
 		"""
 		self.sentences = []
-		self.benchmarks = ['conll2003', 'cornellMD', 'categorical']
-		self.benchmark_flag = 0
-		self.metrics = {}
+		self.benchmarks = ['conll2003', 'cornellMD', 'categorical', 'semEval']
+		self.is_benchmark = 0
+		self.metrics = {
+							'conll2003' : ['precision', 'recall', 'F1'],
+							'cornellMD' : ['precision', 'recall', 'F1'],
+							'categorical' : ['mse'],
+							'semEval' : ['pearseon_coeff']
+						}
 
-	def read_Dataset():
+	@classmethod
+	@abc.abstractmethod
+	def read_Dataset(self, name, fileName):
 		pass
 
-	def readCornellMovieDataset():
+	def readCornellMovieDataset(self, fileName):
 		pass
 
-	def readCategoricalDataset():
+	def readCategoricalDataset(self, fileName):
 		pass
 
-	def clean_conll2003(text, to_lower=False):
-    # clean the text: no weird or special characters
-    text = unidecode(text.decode("utf-8"))
-    # normalize numbers
-    text = re.sub(r"[0-9]", "1", text)
-    if to_lower:
-        text = text.lower()
-    return text
+	def readCoNll2003(self, fileName):
+		pass
 
-	def readCoNll2003(self, to_lower=False, sources=["data/conll2003/train.txt"]):
-		for fname in sources:
-            tokens = []
-            for line in open(fname):
-                if line.startswith("-DOCSTART- -X- -X-"):
-                    if tokens:
-                        yield tokens
-                    tokens = []
-                elif line.strip():
-                    tokens.append(clean_conll2003(line.split()[0], to_lower))
-                else:
-                    tokens.append('')
-            yield tokens
-
+	def readSemEval(self, fileName):
+		pass
+		
+    @classmethod
+	@abc.abstractmethod
 	def train():
 		"""
 		args:	string
@@ -70,16 +61,28 @@ class DITK_TextEmbedding():
 		"""
 		pass
 
-	def predict():
+	@classmethod
+	@abc.abstractmethod
+	def predict_embedding(self, input):
 		"""
-		args: string: a sentence to embed
-		return: vector[int]: a vector embedding of
-		"""
-		
+		Task - Predicts the embedding of the given string/sentence/file 
 
-	def evaluate(self):
+		args: string/ sentence/ file
+		return: vector[int]: a vector embedding of the string/ sentence/ file
 		"""
-		Task - Evaluates a pre-trained model on the test dataset and returns the evaluation metrics as a dictionary
+
+	@classmethod
+	@abc.abstractmethod
+	def predict_similarity(self, input1, input2):
+		"""
+		args: two strings/two sentences/two files
+		return: similarity score (float)
+		"""	
+	@classmethod
+	@abc.abstractmethod
+	def evaluate(self, model, filename):
+		"""
+		Task - Evaluates a pre-trained model on the test dataset and returns the evaluation along with metrics as a dictionary
 
 		Input:
 		model -- path to the pre-trained model
