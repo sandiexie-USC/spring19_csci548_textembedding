@@ -24,10 +24,7 @@ class DITK_TextEmbedding(abc.ABC):
         | SICK Dataset          | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation Coefficient     |
         |                       |                                   |                                            |                                     |
         ------------------------------------------------------------------------------------------------------------------------------------------------
-    """
-    
-
-
+    """    
 
     def __init__(self):
         """
