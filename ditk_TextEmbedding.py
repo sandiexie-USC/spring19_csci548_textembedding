@@ -8,22 +8,22 @@ class DITK_TextEmbedding(abc.ABC):
 
     """
     BENCHMARKS:
-        --------------------------------------------------------------------------------------------------------------------------------------------
-        |   DATASET             |         FORMAT                    |               EXAMPLE                      |    EVALUATION METRICS                    |
-        |-------------------------------------------------------------------------------------------------------------------------------------------
-        | Cornell Movie Reviews | reviews and its sentiment         |"uncompromising french director robert      |   Precision, Recall, F1                  |
-        | Sentiment Analysis    |                                   | bresson's " lancelot of the lake...", pos  |                                          |
-        |------------------------------------------------------------------------------------------------------------------------------------------
-        | CoNll2003: NER        | entity and its type               | ["LOC","Afghanistan"]                      |   Precision, Recall, F1                  |
-        |------------------------------------------------------------------------------------------------------------------------------------------- 
-        | CategoricalDataset    | data and its category             | ["Office Services Coordinator", 69222.18]  |   Mean Square Error                      |
-        |------------------------------------------------------------------------------------------------------------------------------------------
-        | SemEval: Similarity   | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation             | 
-                                                                                                                        Coefficient                |
-        |-------------------------------------------------------------------------------------------------------------------------------------------
-        | SICK Dataset          | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation               |
-        |                                                                                                               Coefficient                 |
-        --------------------------------------------------------------------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        |   DATASET             |         FORMAT                    |               EXAMPLE                      |    EVALUATION METRICS               |     |
+        |-----------------------------------------------------------------------------------------------------------------------------------------------
+        | Cornell Movie Reviews | reviews and its sentiment         |"uncompromising french director robert      |   Precision, Recall, F1             |
+        | Sentiment Analysis    |                                   | bresson's " lancelot of the lake...", pos  |                                     |     |
+        |-----------------------------------------------------------------------------------------------------------------------------------------------
+        | CoNll2003: NER        | entity and its type               | ["LOC","Afghanistan"]                      |   Precision, Recall, F1             |     |
+        |----------------------------------------------------------------------------------------------------------------------------------------------- 
+        | CategoricalDataset    | data and its category             | ["Office Services Coordinator", 69222.18]  |   Mean Square Error                 |     |
+        |-----------------------------------------------------------------------------------------------------------------------------------------------
+        | SemEval: Similarity   | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]|   Pearson Correlation Coefficient   |          | 
+        |                       |                                   |                                            |                                     |                                   Coefficient                |
+        |-----------------------------------------------------------------------------------------------------------------------------------------------
+        | SICK Dataset          | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation Coefficient     |
+        |                       |                                   |                                            |                                     |
+        ------------------------------------------------------------------------------------------------------------------------------------------------
     """
     
 
