@@ -1,24 +1,31 @@
-class ditk_TextEmbedding():
-
+import abc
+class DITK_TextEmbedding(abc.ABC):
+    
+    # This class defines the common behavior that the sub-classes in the family of Text Embedding can implement/inherit
     # Any shared data strcutures or methods should be defined as part of the parent class.
     # A list of shared arguments should be defined for each of the following methods and replace (or precede) *args.
     # The output of each of the following methods should be defined clearly and shared between all methods implemented by members of the group.
 
     """
     BENCHMARKS:
-        ---------------------------------------------------------------------------------------------------------------------------
-        |   DATASET             |         FORMAT            |               EXAMPLE                     |    EVALUATION METRICS   |
-        |--------------------------------------------------------------------------------------------------------------------------
-        | Cornell Movie Reviews | reviews and its sentiment |"uncompromising french director robert     |   Precision, Recall, F1 |
-        | Sentiment Analysis    |                           | bresson's " lancelot of the lake...", pos |                         |
-        |--------------------------------------------------------------------------------------------------------------------------
-        | CoNll2003: NER        | entity and its type       | ["LOC","Afghanistan"]                     |   Precision, Recall, F1 |
-        |-------------------------------------------------------------------------------------------------------------------------- 
-        | CategoricalDataset    | data and its category     | ["Office Services Coordinator", 69222.18] |   Mean Square Error     |
-        |--------------------------------------------------------------------------------------------------------------------------
-        | SemEval: Similarity   |                           |                                           |   Pearson Coefficient   |               |
-        |--------------------------------------------------------------------------------------------------------------------------
+        --------------------------------------------------------------------------------------------------------------------------------------------
+        |   DATASET             |         FORMAT                    |               EXAMPLE                      |    EVALUATION METRICS                    |
+        |-------------------------------------------------------------------------------------------------------------------------------------------
+        | Cornell Movie Reviews | reviews and its sentiment         |"uncompromising french director robert      |   Precision, Recall, F1                  |
+        | Sentiment Analysis    |                                   | bresson's " lancelot of the lake...", pos  |                                          |
+        |------------------------------------------------------------------------------------------------------------------------------------------
+        | CoNll2003: NER        | entity and its type               | ["LOC","Afghanistan"]                      |   Precision, Recall, F1                  |
+        |------------------------------------------------------------------------------------------------------------------------------------------- 
+        | CategoricalDataset    | data and its category             | ["Office Services Coordinator", 69222.18]  |   Mean Square Error                      |
+        |------------------------------------------------------------------------------------------------------------------------------------------
+        | SemEval: Similarity   | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation             | 
+                                                                                                                        Coefficient                |
+        |-------------------------------------------------------------------------------------------------------------------------------------------
+        | SICK Dataset          | sentences and its similarity score|['Dogs are fighting','Dogs are wrestling',4]| Pearson Correlation               |
+        |                                                                                                               Coefficient                 |
+        --------------------------------------------------------------------------------------------------------------------------------------------
     """
+    
 
 
 
@@ -32,7 +39,7 @@ class ditk_TextEmbedding():
         metrics -- dictionary of evaluation metrics along with their computed values after testing
         """
         self.sentences = []
-        self.benchmarks = ['conll2003', 'cornellMD', 'categorical', 'semEval']
+        self.benchmarks = ['conll2003', 'cornellMD', 'categorical', 'semEval','sick']
         self.is_benchmark = False
         self.metrics = {
             'conll2003': [
@@ -49,7 +56,10 @@ class ditk_TextEmbedding():
                 'mse'
             ],
             'semEval': [
-                'pearseon_coeff'
+                'pearson_coeff'
+            ]
+             'semEval': [
+                'pearson_coeff'
             ]
         }
 
@@ -60,7 +70,7 @@ class ditk_TextEmbedding():
         Task - reads the dataset "name" provided by the user in the "fileName" path. Can be a benchmark dataset or a list of tokens
         
         Input:
-        name -- string -- Can be one of the following : ['conll2003', 'semEval', 'categorical'] or a method specific dataset
+        name -- string -- Can be one of the following : ['conll2003', 'semEval', 'categorical','sick'] or a method specific dataset
         fileName -- string -- Directory Path to the dataset
 
         return:
