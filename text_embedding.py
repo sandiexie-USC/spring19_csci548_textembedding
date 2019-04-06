@@ -1,5 +1,5 @@
 import abc
-class DITK_TextEmbedding(abc.ABC):
+class TextEmbedding(abc.ABC):
     
     # This class defines the common behavior that the sub-classes in the family of Text Embedding can implement/inherit
     # Any shared data strcutures or methods should be defined as part of the parent class.
