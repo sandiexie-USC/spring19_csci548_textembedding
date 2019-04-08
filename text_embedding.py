@@ -111,9 +111,9 @@ class TextEmbedding(abc.ABC):
         """
         pass
 
-    def readSemEval(self, fileName):
+    def readSemEvalSick(self, fileName):
         """
-        Task - reads the SemEval Benchmark Dataset which is present in the "fileName" path
+        Task - reads the SemEval and SICK Benchmark Dataset which is present in the "fileName" path
         
         Input:
         fileName -- string -- Directory Path to the dataset
