@@ -32,7 +32,7 @@ class TextEmbedding(abc.ABC):
 
         sentences -- input for each model as required by each method
         benchmarks -- list of pre-defined benchmarks as strings
-        benchmark_flag -- boolean value to indicate if the dataset read is a benchmark or not
+        is_benchmark -- boolean value to indicate if the dataset read is a benchmark or not
         metrics -- dictionary of evaluation metrics along with their computed values after testing
         """
         self.sentences = []
