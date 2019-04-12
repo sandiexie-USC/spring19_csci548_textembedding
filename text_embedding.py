@@ -75,54 +75,6 @@ class TextEmbedding(abc.ABC):
         """
         pass
 
-    def readCornellMovieDataset(self, fileName):
-        """
-        Task - reads the Cornell Movie Reviews Benchmark Dataset which is present in the "fileName" path
-        
-        Input:
-        fileName -- string -- Directory Path to the dataset
-
-        return:
-        stores the dataset in method appropriate format in self.sentences
-        """
-        pass
-
-    def readCategoricalDataset(self, fileName):
-        """
-        Task - reads the Categorical Benchmark Dataset which is present in the "fileName" path
-        
-        Input:
-        fileName -- string -- Directory Path to the dataset
-
-        return:
-        stores the dataset in method appropriate format in self.sentences
-        """
-        pass
-
-    def readCoNll2003(self, fileName):
-        """
-        Task - reads the CoNLL NER Benchmark Dataset which is present in the "fileName" path
-        
-        Input:
-        fileName -- string -- Directory Path to the dataset
-
-        return:
-        stores the dataset in method appropriate format in self.sentences
-        """
-        pass
-
-    def readSemEvalSick(self, fileName):
-        """
-        Task - reads the SemEval and SICK Benchmark Dataset which is present in the "fileName" path
-        
-        Input:
-        fileName -- string -- Directory Path to the dataset
-
-        return:
-        stores the dataset in method appropriate format in self.sentences
-        """
-        pass
-    
     @classmethod
     @abc.abstractmethod
     def train(self, *argv, **kwargs):
